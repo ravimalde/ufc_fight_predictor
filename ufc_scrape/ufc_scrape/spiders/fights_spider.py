@@ -10,13 +10,13 @@ class FightsSpider(scrapy.Spider):
     def parse(self, response):
         events = response.xpath("//tr/td/i/a")
         for event in events:
-            event_name = event.xpath(".//text()").get()
-            self.event_name = event_name
             link = event.xpath(".//@href").get()
         
-            yield response.follow(url = link, callback=self.parse_event, meta={'event_name': event_name})
+            yield response.follow(url = link, callback=self.parse_event)
 
     def parse_event(self, response):
+        event_name = response.xpath("//h2/span/text()").extract()
+        event_date = response.xpath("//div[@class='b-list__info-box b-list__info-box_style_large-width']/ul/li[1]/text()").extract()
         rows = response.xpath("(//table[@class='b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table'])/tbody/tr")
         for row in rows:
             f1_name = row.xpath(".//td[2]/p[1]/a/text()").get()
@@ -50,4 +50,6 @@ class FightsSpider(scrapy.Spider):
                 'finisher': finisher,
                 'round_num': round_num,
                 'time': time,
+                'event_name': event_name,
+                'event_date': event_date
             }
