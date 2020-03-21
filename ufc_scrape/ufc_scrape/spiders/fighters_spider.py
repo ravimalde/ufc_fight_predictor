@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import string
 
 
 class FightersSpider(scrapy.Spider):
+
     name = 'fighters'
-    allowed_domains = ['www.ufcstats.com']
-    start_urls = ['http://www.ufcstats.com/statistics/fighters']
+
+    def start_requests(self):
+
+        start_urls = ['http://www.ufcstats.com/statistics/fighters?char=' + letter + '&page=all' for letter in string.ascii_lowercase
+        ]
+
+        for url in start_urls:
+            yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        fighters = response.xpath("(//td[1][@class='b-statistics__table-col'])/a")
-        for fighter in fighters:
-            link = fighter.xpath(".//@href").get()
-            yield response.follow(url = link, callback=self.parse_fighter)
+        fighter_links = response.xpath("//td[@class ='b-statistics__table-col']//@href").extract()
+        for link in fighter_links:
+            yield scrapy.Request(url=link, callback=self.parse_fighter)
 
     def parse_fighter(self, response):
         body_stats = "//ul[@class='b-list__box-list']"

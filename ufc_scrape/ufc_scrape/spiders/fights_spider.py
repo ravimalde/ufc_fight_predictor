@@ -5,7 +5,7 @@ import scrapy
 class FightsSpider(scrapy.Spider):
     name = 'fights'
     allowed_domains = ['www.ufcstats.com']
-    start_urls = ['http://www.ufcstats.com/statistics/events/completed']
+    start_urls = ['http://www.ufcstats.com/statistics/events/completed?page=all']
 
     def parse(self, response):
         events = response.xpath("//tr/td/i/a")
