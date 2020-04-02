@@ -9,10 +9,7 @@ class FightsSpider(scrapy.Spider):
 
     def parse(self, response):
         events = response.xpath("//tr/td/i/a")
-        for event in events:
-            link = event.xpath(".//@href").get()
         
-            yield response.follow(url = link, callback=self.parse_event)
 
     def parse_event(self, response):
         event_name = response.xpath("//h2/span/text()").extract()

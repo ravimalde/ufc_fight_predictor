@@ -54,7 +54,7 @@ class FightersSpider(scrapy.Spider):
         f1_name_span = response.xpath("(//h3[@class='b-fight-details__person-name'])[1]/span/text()").get()
         f2_name_a = response.xpath("(//h3[@class='b-fight-details__person-name'])[2]/a/text()").get()
         f2_name_span = response.xpath("(//h3[@class='b-fight-details__person-name'])[2]/span/text()").get()
-        weightclass = response.xpath("//i[@class='b-fight-details__fight-title']/text()").get()
+        weightclass = response.xpath("//i[@class='b-fight-details__fight-title']/text()").getall()
         rounds = response.xpath("(//i[@class='b-fight-details__text-item'])[1]/text()").extract()
         time = response.xpath("(//i[@class='b-fight-details__text-item'])[2]/text()").extract()
         f1_result = response.xpath("(//div[@class='b-fight-details__person'])[1]/i/text()").get()
