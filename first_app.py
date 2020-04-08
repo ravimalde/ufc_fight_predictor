@@ -46,6 +46,8 @@ if st.button('PREDICT'):
     df_full[x_cols] = scaler.transform(df_full[x_cols])
     df_full[y_cols] = scaler.transform(df_full[y_cols])
 
+    df_full
+
     model = load(open('model.pkl', 'rb'))
     prediction = model.predict(df_full)[0]
 
