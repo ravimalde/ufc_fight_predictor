@@ -11,11 +11,13 @@ df = pd.read_csv("data_for_database.csv")
 
 option1 = st.sidebar.selectbox(
     'Fighter 1',
-    df['name'])
+    df['name'],
+    index=1841)
 
 option2 = st.sidebar.selectbox(
     'Fighter 2',
-    df['name'])
+    df['name'],
+    index=1020)
 
 st.header(option1 + '    vs    ' + option2)
 
@@ -29,28 +31,27 @@ fighter2_stats
 
 if st.button('PREDICT'):
 
-    new_cols = ['height_diff','reach_diff','weight_diff','age_diff','str_landed_per_min_diff','str_acc_diff',
-                'str_absorb_per_min_diff','str_def_diff','td_avg_diff','td_acc_diff','td_def_diff',
-                'sub_avg_diff','win_percentage_diff']
+    fighter1_stats.reset_index(drop=True, inplace=True)
+    fighter2_stats.reset_index(drop=True, inplace=True)
 
-    old_cols = ['height','reach','weight','age','str_landed_per_min','str_acc',
-                'str_absorb_per_min','str_def','td_avg','td_acc','td_def',
-                'sub_avg','win_percentage']
+    df_full = fighter1_stats.join(fighter2_stats, lsuffix='_x', rsuffix='_y')
     
-    df_diff = pd.DataFrame()
-
-    for i in range(len(new_cols)):
-        df_diff[new_cols[i]] = fighter1_stats[old_cols[i]].values - fighter2_stats[old_cols[i]].values
+    df_full.drop(columns=['name_x','dob_x','wins_x','losses_x','draws_x',
+                          'name_y','dob_y','wins_y','losses_y','draws_y'], inplace=True)
+    
+    x_cols = [col for col in df_full.columns if '_x' in col]
+    y_cols = [col for col in df_full.columns if '_y' in col]
 
     scaler = load(open('scaler.pkl', 'rb'))
-    scaled_data = scaler.transform(df_diff)
+    df_full[x_cols] = scaler.transform(df_full[x_cols])
+    df_full[y_cols] = scaler.transform(df_full[y_cols])
 
     model = load(open('model.pkl', 'rb'))
-    prediction = model.predict(scaled_data)[0]
+    prediction = model.predict(df_full)[0]
 
-    prob = model.predict_proba(scaled_data)
+    prob = model.predict_proba(df_full)
     prob1 = round(prob[0][1], 2)
-    prob2 = round(1-prob1, 2)
+    prob2 = round(prob[0][0], 2)
 
     if prediction == 1:
         st.subheader(str(option1) + " wins with a probability of " + str(prob1))
