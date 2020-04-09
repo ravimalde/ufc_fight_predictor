@@ -31,45 +31,85 @@ fighter2_stats
 
 if st.button('PREDICT'):
 
+    fighter1_stats_copy = fighter1_stats.copy()
+    fighter2_stats_copy = fighter1_stats.copy()
+
     fighter1_stats.reset_index(drop=True, inplace=True)
     fighter2_stats.reset_index(drop=True, inplace=True)
 
-    df_full = fighter1_stats.join(fighter2_stats, lsuffix='_x', rsuffix='_y')
+    df_full1 = fighter1_stats.join(fighter2_stats, lsuffix='_x', rsuffix='_y')
+    df_full2 = fighter2_stats.join(fighter1_stats, lsuffix='_x', rsuffix='_y')
     
-    df_full.drop(columns=['name_x','dob_x','wins_x','losses_x','draws_x',
-                          'name_y','dob_y','wins_y','losses_y','draws_y'], inplace=True)
-    
-    x_cols = [col for col in df_full.columns if '_x' in col]
-    y_cols = [col for col in df_full.columns if '_y' in col]
+    df_full1['stance_x_Open Stance'] = df_full1['stance_x'].apply(lambda x: 1 if (x == 'Open Stance') else 0)
+    df_full1['stance_x_Orthodox'] = df_full1['stance_x'].apply(lambda x: 1 if (x == 'Orthodox') else 0)
+    df_full1['stance_x_Sideways'] = df_full1['stance_x'].apply(lambda x: 1 if (x == 'Sideways') else 0)
+    df_full1['stance_x_Southpaw'] = df_full1['stance_x'].apply(lambda x: 1 if (x == 'Southpaw') else 0)
+    df_full1['stance_x_Switch'] = df_full1['stance_x'].apply(lambda x: 1 if (x == 'Switch') else 0)
+
+    df_full1['stance_y_Open Stance'] = df_full1['stance_y'].apply(lambda x: 1 if (x == 'Open Stance') else 0)
+    df_full1['stance_y_Orthodox'] = df_full1['stance_y'].apply(lambda x: 1 if (x == 'Orthodox') else 0)
+    df_full1['stance_y_Sideways'] = df_full1['stance_y'].apply(lambda x: 1 if (x == 'Sideways') else 0)
+    df_full1['stance_y_Southpaw'] = df_full1['stance_y'].apply(lambda x: 1 if (x == 'Southpaw') else 0)
+    df_full1['stance_y_Switch'] = df_full1['stance_y'].apply(lambda x: 1 if (x == 'Switch') else 0)
+
+    df_full2['stance_y_Open Stance'] = df_full2['stance_y'].apply(lambda x: 1 if (x == 'Open Stance') else 0)
+    df_full2['stance_y_Orthodox'] = df_full2['stance_y'].apply(lambda x: 1 if (x == 'Orthodox') else 0)
+    df_full2['stance_y_Sideways'] = df_full2['stance_y'].apply(lambda x: 1 if (x == 'Sideways') else 0)
+    df_full2['stance_y_Southpaw'] = df_full2['stance_y'].apply(lambda x: 1 if (x == 'Southpaw') else 0)
+    df_full2['stance_y_Switch'] = df_full2['stance_y'].apply(lambda x: 1 if (x == 'Switch') else 0)
+
+    df_full2['stance_x_Open Stance'] = df_full2['stance_x'].apply(lambda x: 1 if (x == 'Open Stance') else 0)
+    df_full2['stance_x_Orthodox'] = df_full2['stance_x'].apply(lambda x: 1 if (x == 'Orthodox') else 0)
+    df_full2['stance_x_Sideways'] = df_full2['stance_x'].apply(lambda x: 1 if (x == 'Sideways') else 0)
+    df_full2['stance_x_Southpaw'] = df_full2['stance_x'].apply(lambda x: 1 if (x == 'Southpaw') else 0)
+    df_full2['stance_x_Switch'] = df_full2['stance_x'].apply(lambda x: 1 if (x == 'Switch') else 0)
+
+    df_full1.drop(columns=['name_x','stance_x','dob_x','wins_x','losses_x','draws_x',
+                          'name_y','stance_y','dob_y','wins_y','losses_y','draws_y'], inplace=True)
+    df_full2.drop(columns=['name_x','stance_x','dob_x','wins_x','losses_x','draws_x',
+                          'name_y','stance_y','dob_y','wins_y','losses_y','draws_y'], inplace=True)
+
+    x_num_cols = [col for col in df_full1.columns if '_x' in col and 'stance'not in col]
+    y_num_cols = [col for col in df_full1.columns if '_y' in col and 'stance'not in col]
 
     scaler = load(open('scaler.pkl', 'rb'))
-    df_full[x_cols] = scaler.transform(df_full[x_cols])
-    df_full[y_cols] = scaler.transform(df_full[y_cols])
-
-    df_full
+    df_full1[x_num_cols] = scaler.transform(df_full1[x_num_cols])
+    df_full1[y_num_cols] = scaler.transform(df_full1[y_num_cols])
+    df_full2[x_num_cols] = scaler.transform(df_full2[x_num_cols])
+    df_full2[y_num_cols] = scaler.transform(df_full2[y_num_cols])
 
     model = load(open('model.pkl', 'rb'))
-    prediction = model.predict(df_full)[0]
+    prediction1 = model.predict(df_full1)[0]
+    prediction2 = model.predict(df_full2)[0]
 
-    prob = model.predict_proba(df_full)
-    prob1 = round(prob[0][1], 2)
-    prob2 = round(prob[0][0], 2)
+    prob1 = model.predict_proba(df_full1)
+    prob1_1 = round(prob1[0][0], 2)
+    prob2_1 = round(prob1[0][1], 2)
 
-    if prediction == 1:
-        st.subheader(str(option1) + " wins with a probability of " + str(prob1))
-    elif prediction == 0:
-        st.subheader(str(option2) + " wins with a probability of " + str(prob2))
+    prob2 = model.predict_proba(df_full2)
+    prob1_2 = round(prob2[0][0], 2)
+    prob2_2 = round(prob2[0][1], 2)
+
+    if str(option1) == str(option2):
+        st.subheader("The same fighter is selected. Please select two different fighters.")
+    elif prob1_1 > prob2_1 and prob1_1 > prob1_2 and prob1_1 > prob2_2:
+        st.subheader(str(option2) + " wins with a probability of " + str(prob1_1))
+    elif prob2_1 > prob1_1 and prob2_1 > prob1_2 and prob2_1 > prob2_2:
+        st.subheader(str(option1) + " wins with a probability of " + str(prob2_1))
+    elif prob1_2 > prob1_1 and prob1_2 > prob2_1 and prob1_2 > prob2_2:
+        st.subheader(str(option1) + " wins with a probability of " + str(prob1_2))
+    elif prob2_2 > prob1_1 and prob2_2 > prob1_2 and prob2_2 > prob2_1:
+        st.subheader(str(option2) + " wins with a probability of " + str(prob2_2))
 else:
     pass
 
-
 fighter1_wins = df['wins'].loc[df['name'] == option1].values[0]
-fighter1_losses = df['draws'].loc[df['name'] == option1].values[0]
-fighter1_draws = df['losses'].loc[df['name'] == option1].values[0]
+fighter1_losses = df['losses'].loc[df['name'] == option1].values[0]
+fighter1_draws = df['draws'].loc[df['name'] == option1].values[0]
 
 fighter2_wins = df['wins'].loc[df['name'] == option2].values[0]
-fighter2_losses = df['draws'].loc[df['name'] == option2].values[0]
-fighter2_draws = df['losses'].loc[df['name'] == option2].values[0]
+fighter2_losses = df['losses'].loc[df['name'] == option2].values[0]
+fighter2_draws = df['draws'].loc[df['name'] == option2].values[0]
 
 labels = ['Draws','Losses','Wins']
 fighter1_record = [fighter1_draws, fighter1_losses, fighter1_wins]
@@ -247,7 +287,10 @@ option3 = st.sidebar.checkbox(
     'Show Statistic Definitions',
 )
 
-stat_descriptions = "str_landed_per_min: Strikes landed per minute in the last 5 fights.\nstr_def: Percentage strikes from opponent that did not land in the last 5 fights.\nstr_absorb_per_min: Strikes from opponent that landed per minute over the last 5 fights."
+stat_descriptions = "str_landed_per_min: Strikes landed per minute in the last 5 fights.\n\
+                        str_def: Percentage strikes from opponent that did not land in the last 5 fights.\n\
+                            str_absorb_per_min: Strikes from opponent that landed per minute over the last 5 fights.\n\
+                                "
 
 if option3 == True:
     st.text(stat_descriptions)
