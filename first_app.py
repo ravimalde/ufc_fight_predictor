@@ -287,9 +287,14 @@ option3 = st.sidebar.checkbox(
     'Show Statistic Definitions',
 )
 
-stat_descriptions = "str_landed_per_min: Strikes landed per minute in the last 5 fights.\n\
-str_def: Percentage strikes from opponent that did not land in the last 5 fights.\n\
-str_absorb_per_min: Strikes from opponent that landed per minute over the last 5 fights."
+stat_descriptions = "str_landed_per_min: Strikes landed per minute over the last 5 fights.\n\
+str_acc: Percentage of attempted strikes that landed over the last 5 fights.\n\
+str_absorb_per_min: Strikes from opponent that landed per minute over the last 5 fights.\n\
+str_def: Percentage of opponent strikes that did not land over the last 5 fights.\n\
+td_avg: Average takedowns landed per 15 mins over the last 5 fights.\n\
+td_acc: Percentage of attempted takedowns that landed over the last 5 fights.\n\
+td_def: Percentage of opponent takedowns that did not land over the last 5 fights.\n\
+sub_avg: Average submissions attempted per 15 mins over the last 5 fights."
 
 if option3 == True:
     st.text(stat_descriptions)
