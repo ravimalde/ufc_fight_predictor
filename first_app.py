@@ -289,9 +289,7 @@ option3 = st.sidebar.checkbox(
 
 stat_descriptions = "str_landed_per_min: Strikes landed per minute in the last 5 fights.\n\
 str_def: Percentage strikes from opponent that did not land in the last 5 fights.\n\
-str_absorb_per_min: Strikes from opponent that landed per minute over the last 5 fights.\n\
-
-"
+str_absorb_per_min: Strikes from opponent that landed per minute over the last 5 fights."
 
 if option3 == True:
     st.text(stat_descriptions)
