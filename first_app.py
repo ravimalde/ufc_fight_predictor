@@ -29,6 +29,9 @@ st.subheader(option2 + "'s Statistics:")
 fighter2_stats = df.loc[df['name'] == option2]
 fighter2_stats
 
+st.text('')
+st.text('')
+
 if st.button('PREDICT'):
 
     fighter1_stats_copy = fighter1_stats.copy()
@@ -38,7 +41,7 @@ if st.button('PREDICT'):
     fighter2_stats.reset_index(drop=True, inplace=True)
 
     df_full1 = fighter1_stats.join(fighter2_stats, lsuffix='_x', rsuffix='_y')
-    df_full2 = fighter2_stats.join(fighter1_stats, lsuffix='_x', rsuffix='_y')
+    df_full2 = fighter2_stats.join(fighter1_stats, lsuffix='_y', rsuffix='_x')
     
     df_full1['stance_x_Open Stance'] = df_full1['stance_x'].apply(lambda x: 1 if (x == 'Open Stance') else 0)
     df_full1['stance_x_Orthodox'] = df_full1['stance_x'].apply(lambda x: 1 if (x == 'Orthodox') else 0)
@@ -130,23 +133,26 @@ plt.rc('figure', titlesize=BIGGER_SIZE)
 ind = np.arange(len(labels))
 width = 0.35
 fig, ax = plt.subplots(figsize=(16,6))
-ax.barh(ind, fighter1_record, width, label=str(option1), color='royalblue')
-ax.barh(ind + width, fighter2_record, width, label=str(option2), color='tomato')
+ax.barh(ind, fighter2_record, width, label=str(option2), color='tomato')
+ax.barh(ind + width, fighter1_record, width, label=str(option1), color='royalblue')
 ax.set(yticks=ind+width/2, yticklabels=labels, ylim=[2*width - 1, len(labels)])
 ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), shadow=False, ncol=2)
+plt.title("MMA Record", fontsize=22)
 st.pyplot()
 
 option4 = st.sidebar.checkbox(
-    'Static Statistic Plots',
+    'Static Fighter Statistic Plots',
     value=True
 )
 
 option5 = st.sidebar.checkbox(
-    'Standing Fighter Stat Plots',
+    'Standing Fighter Statistic Plots',
+    value=True
 )
 
 option6 = st.sidebar.checkbox(
-    'Ground Fighter Stat Plots'
+    'Ground Fighter Statistic Plots',
+    value=True
 )
 
 f1_height = df['height'][df['name'] == option1].values[0]
@@ -275,7 +281,7 @@ if option6 == True:
 
     plt.figure(figsize=(16,3))
     plt.barh([str(option2).split(' ')[-1], str(option1).split(' ')[-1]], [f2_sub_avg, f1_sub_avg], color=('tomato','royalblue'))
-    plt.title("Takedown Defence (%)", fontsize=22)
+    plt.title("Submission Attempts per 15 mins", fontsize=22)
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
     st.pyplot()
