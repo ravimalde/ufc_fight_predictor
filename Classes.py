@@ -72,17 +72,17 @@ class Classification():
         train_prob = model.predict_proba(X_train)[:,1]
         val_prob = model.predict_proba(X_val)[:,1]
         
-        train_auc = roc_auc_score(y_train, train_prob)
-        val_auc = roc_auc_score(y_val, val_prob)
+        auc_train = roc_auc_score(y_train, train_prob)
+        auc_val = roc_auc_score(y_val, val_prob)
         
-        self.train_auc = train_auc
-        self.val_auc = val_auc
+        self.train_auc = auc_train
+        self.val_auc = auc_val
         
         self.scores_table = pd.DataFrame()
         
         self.scores_table["Model"] = [self.model]
-        self.scores_table["Train AUC"] = [self.train_auc]
-        self.scores_table["Validation AUC"] = [self.val_auc]
+        self.scores_table["Train AUC"] = [self.auc_train]
+        self.scores_table["Validation AUC"] = [self.auc_val]
         
         return self.scores_table
     
@@ -133,12 +133,13 @@ class Classification():
         self.best_params = opt_model.best_params_
         display(self.scores_table)
         print("The best hyperparameters are: ", self.best_params,'\n')
-        self.roc_plot = Classification.roc_plot(self.best_model,
+        self.roc_plot = Classification.roc_plot(self,
+                                                self.best_model,
                                                 self.X_train,
                                                 self.X_val,
                                                 self.y_train,
                                                 self.y_val)
-        self.y_predicted = opt_model.predict(self.X_val)
+        self.y_predicted = self.best_model.predict(self.X_val)
         
 # OPTIMUM PLOT FUCNTION ------------------------------------------------------
 
