@@ -97,7 +97,7 @@ class Classification():
             
 # ROC PLOT FUNCTION ----------------------------------------------------------
 
-    def roc_plot(model, X_train, X_val, y_train, y_val):
+    def roc_plot(self, model, X_train, X_val, y_train, y_val):
         train_prob = model.predict_proba(X_train)[:,1]
         val_prob = model.predict_proba(X_val)[:,1]
         plt.figure(figsize=(7,7))
@@ -132,8 +132,12 @@ class Classification():
                                             self.y_val)
         self.best_params = opt_model.best_params_
         display(self.scores_table)
-        print("The best hyperparameters are: ", self.best_params,'\n')
-        self.roc_plot = Classification.roc_plot(self.best_model,
+        if param_grid == {}:
+            pass
+        else:
+            print("The best hyperparameters are: ", self.best_params,'\n')
+        self.roc_plot = Classification.roc_plot(self,
+                                                self.best_model,
                                                 self.X_train,
                                                 self.X_val,
                                                 self.y_train,
