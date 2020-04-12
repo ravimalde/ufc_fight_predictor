@@ -75,8 +75,8 @@ class Classification():
         auc_train = roc_auc_score(y_train, train_prob)
         auc_val = roc_auc_score(y_val, val_prob)
         
-        self.train_auc = auc_train
-        self.val_auc = auc_val
+        self.auc_train = auc_train
+        self.auc_val = auc_val
         
         self.scores_table = pd.DataFrame()
         
@@ -133,8 +133,7 @@ class Classification():
         self.best_params = opt_model.best_params_
         display(self.scores_table)
         print("The best hyperparameters are: ", self.best_params,'\n')
-        self.roc_plot = Classification.roc_plot(self,
-                                                self.best_model,
+        self.roc_plot = Classification.roc_plot(self.best_model,
                                                 self.X_train,
                                                 self.X_val,
                                                 self.y_train,
