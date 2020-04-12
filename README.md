@@ -53,6 +53,8 @@ The UFC maintains a statistics website (www.ufcstats.com) that contains informat
 
 Once the data had been through a fair amount of work in pandas, I had each fighter's pre-fight statistics for each of their fights and the data was ready for modelling. A total of 15 models were made, their scores on the validation dataset are outlined below:
 
+![Model Performances]
+(https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_evaluation.png)
 
 The stacking model comprised of a support vector machine, random forest and xgboost model was the best performer (see diagram below for model architecture). The most important features in the dataset are also given beneath.
 
@@ -61,4 +63,4 @@ The model achieved an accuracy of 0.65 on the test dataset. The nature of combat
 
 To create the application I used Streamlit (www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. The layout of the application I designed allows the user to choose from any two fighters in the organisation and predict who the winner will be and display what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib plots so that the user can easily see a visual representation of how the fighter's compare.
 
-Lastly, the application was deployed to the web using Heroku. 
+Lastly, the application was deployed to the web using Heroku. This is a cloud platform as a service 
