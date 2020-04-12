@@ -28,6 +28,7 @@ This project was completed as a capstone project for my time on the Flation Data
 - Data exploration
 - Data visualisation
 - Machine learning
+- Cloud computing
 - Front end development
 - Deploying to web
 
@@ -40,6 +41,7 @@ This project was completed as a capstone project for my time on the Flation Data
 - Matplotlib
 - Scikit-learn
 - Keras
+- Google Cloud Platform
 - Streamlit
 - Heroku
 
