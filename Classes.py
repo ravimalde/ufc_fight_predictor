@@ -1,4 +1,3 @@
-
 import pandas as pd
 from datetime import date, timedelta
 import numpy as np
@@ -121,6 +120,7 @@ class Classification():
                                  cv=cv_type,
                                  scoring='roc_auc',
                                  return_train_score=True,
+                                 refit=True,
                                  n_jobs=-1)
         self.opt_model = opt_model.fit(self.X_train, self.y_train) 
         self.best_model = opt_model.best_estimator_
@@ -293,12 +293,13 @@ class Ensemble(Classification):
         self.scores = Ensemble.ensemble_scores(self)
         self.best_params = opt_model.best_params_
         display(self.scores_table)
-        self.roc_plot = Classification.roc_plot(self.best_model,
+        self.roc_plot = Classification.roc_plot(self,
+                                                self.best_model,
                                                 self.X_train,
                                                 self.X_val,
                                                 self.y_train,
                                                 self.y_val)
-        self.y_predicted = opt_model.predict(self.X_val)
+        self.y_predicted = self.best_model.predict(self.X_val)
         
     def conf_matrix(y_true, y_pred):
         
