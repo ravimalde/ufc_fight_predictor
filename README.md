@@ -58,7 +58,7 @@ The UFC maintains a [statistics website](www.ufcstats.com) that contains informa
 
 <h5 align="center">Number of Fights in the UFC Each Year</h5>
 <p align="center">
-  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/fights_bar_plot.png" width=850>
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/number_of_fights.png" width=850>
 </p>
 
 ### Cleaning Data and Feature Engineering
