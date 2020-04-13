@@ -14,7 +14,7 @@ The aim of this project was to create an interactive application that uses a mac
 - data:
   - data_fighters.py: scraped data of each fighter's fight details.
   - data_fights.py: scraped data of each UFC event.
-- Classes.py: contains grid search classes to be usedin modelling.
+- Classes.py: contains grid search classes to be used in modelling.
 - preprocessing.ipynb: notebook for initial exploration of scraped data and preprocessing for modelling.
 - first_app.py: python file for creating the streamlit application.
 - model.pkl: final model saved using pickle.
@@ -58,22 +58,35 @@ The UFC maintains a [statistics website](www.ufcstats.com) that contains informa
 
 ### Cleaning Data and Feature Engineering
 
-A standard data cleaning procedure was followed where the data was formatted into the correct data types and then missing values were handled appropriately, usually filling in the value with a related column (e.g. height and reach) or to fill in with the median of the weightclass group.
+A standard data cleaning procedure was followed where the data was formatted into the correct data types and then missing values were handled appropriately, usually filling in the value with a related column (e.g. height and reach) or filling in with the median of the weightclass group.
 
-To prevent data leakage it was important to only use data of a fighter that was available prior to the fight occuring. For example, a fighter's current career statistics should not be used to train the model on the outcome of a fight that occured 5 fights ago, because those statistics would have been different at the time of the fight. This was one of the major hurdles of the project and it was why the detailed breakdown of each fight had to be scraped, so that a fighter's statistics at the point of each past fight could be calculated.
+A major effort in the project was to prevent data leakage. It was important to only use data of a fighter that was available prior to the fight occuring. For example, a fighter's current career statistics should not be used to train the model on the outcome of a fight that occured 5 fights ago, because those statistics would have been different at the time of the fight. Therefore, for each past fight, the fighters' pre-fight statistics were calculated using the detailed breakdown of their previous bouts. Additionally to this, only the fighters' 5 previous fights were used to caluclate their pre-fight statistics. This decision was made to do this because over a fighter's career, their performance and style of fighting can change so only their recent performances should be considered.
 
-The features left tp
+The features fed into the model were as follows:
+
+- Height (m)
+- Weight (lbs)
+- Reach (m)
+- Age (years)
+- Strikes Landed (per minute)
+- Striking Accuracy (%)
+- Strikes Absorbed (per minute)
+- Striking Defence (%)
+- Takedown Average (per 15 minutes)
+- Takedown Accuracy (%)
+- Takedown Defence (%)
+- Submissions Average (per 15 mins)
 
 ### Modelling
 
-Once the data had been through a fair amount of work in pandas, I had each fighter's pre-fight statistics for each of their fights and the data was ready for modelling. Many models were created and their hyperparameters were tuned, the best performers from each model type are presented below (sorted by performance on the validation dataset):
+Many models were created and their hyperparameters were tuned, the best performers from each model type are presented below (sorted by performance on the validation dataset):
 
 <h5 align="center">Model Performances</h5>
 <p align="center">
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_evalutaion.png" width=500>
 </p>
 
-The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because it is understood that stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was comprised of models that had similarities. 
+The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was comprised of models that had similarities. 
 
 <h5 align="center">Stacking Model Architecture</h5>
 <p align="center">
