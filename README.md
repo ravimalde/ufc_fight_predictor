@@ -58,10 +58,13 @@ Once the data had been through a fair amount of work in pandas, I had each fight
 
 The stacking model comprised of a support vector machine, random forest and xgboost model was the best performer (see diagram below for model architecture). The most important features in the dataset are also given beneath.
 
-<img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/feature_importance.png" width=850 align=middle>
+<h5 align="center">Relative Feature Importance</h5>
+<p align="center">
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/feature_importance.png" width=850 align=middle>
+</p>
 
 The model achieved an accuracy of 0.65 on the test dataset. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent. The whole outcome of a fight can change in a fraction of a second so although this acuracy isn't impressive on paper, I'm fairly happy with the outcome and I'm confident that this could be improved upon in the future with more data.
 
-To create the application I used Streamlit (www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. The layout of the application I designed allows the user to choose from any two fighters in the organisation and predict who the winner will be and display what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib plots so that the user can easily see a visual representation of how the fighter's compare.
+To create the application I used a realtively new framework called Streamlit (www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. The layout of the application I designed allows the user to choose from any two fighters in the organisation and predict who the winner will be and display what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib plots so that the user can easily see a visual representation of how the fighter's compare.
 
 Lastly, the application was deployed to the web using Heroku. This is a cloud platform as a service 
