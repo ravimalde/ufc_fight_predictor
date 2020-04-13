@@ -109,11 +109,11 @@ An interesting insight from the model is the relative feature importances. These
 
 ### Developing Application
 
-To create the application I used a realtively new framework called Streamlit (www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. I designed the application to allow the user to choose from any two fighters in the organisation and predict who the winner will be while displaying what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib plots so that the user can easily see a visual representation of how the fighter's compare.
+To create the application I used a realtively new framework called [Streamlit](www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. I designed the application to allow the user to choose from any two fighters in the organisation and predict who the winner will be while displaying what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib plots so that the user can easily see a visual representation of how the fighter's compare.
 
 ### Deploying Application
 
-Lastly, the application was deployed to the web using Heroku. This is a cloud platform as a service that allows developers to deploy and scale applicatons. The process was fairly straightforward; simply create an account with them, make a Procfile which is automatically detected by Heroku and serves to outline the commands that need to be run in order to launch the application, and then create a requirements.txt file to tell Heroku which python dependencies are necessary for the application to function. The final step is then to git push the entire github repository to the Heroku branch. Voila, the application is now live and can be accessed by anyone around the world.
+Lastly, the application was deployed to the web using [Heroku](www.heroku.com). This is a cloud platform as a service that allows developers to deploy and scale applicatons. The process was fairly straightforward; simply create an account with them, make a Procfile which is automatically detected by Heroku and serves to outline the commands that need to be run in order to launch the application, and then create a requirements.txt file to tell Heroku which python dependencies are necessary for the application to function. The final step is then to git push the entire github repository to the Heroku branch. Voila, the application is now live and can be accessed by anyone around the world.
 
 ### Limitations
 
