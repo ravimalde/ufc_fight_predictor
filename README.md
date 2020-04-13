@@ -100,7 +100,7 @@ An interesting insight from the model is the relative feature importances. These
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/feature_importance.png" width=850 align=middle>
 </p>
 
-The model achieved an accuracy of 0.64 on the test dataset. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequentin (in fact this is in part why I believe the sport is gaining huge popularity), so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
+**The model achieved an accuracy of 0.64 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent in (in fact this is in part why I believe the sport is gaining huge popularity), so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
 
 ### Developing Application
 
