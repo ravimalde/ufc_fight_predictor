@@ -53,7 +53,7 @@ Once the data had been through a fair amount of work in pandas, I had each fight
 
 <h5 align="center">Model Performances</h5>
 <p align="center">
-  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model%20evaluation.png" title="Model Performances" width=500>
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_evalutaion.png" width=500>
 </p>
 
 The stacking model comprised of a support vector machine, random forest and xgboost model was the best performer (see diagram below for model architecture). The most important features in the dataset are also given beneath.
