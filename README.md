@@ -1,6 +1,6 @@
 # UFC Fight Predictor
 
-This project was completed as a capstone project for my time on the Flation Data Science Immersive course.
+The aim of this project is to create an interactive application that uses a machine learning model to make predictions on UFC fights using fighter statistics. This application would serve as an entertainment tool to increase traffic to a UFC website/blog. The application can be found at https://ufc-fight-predictor.herokuapp.com.
 
 ## File Descriptions
 
@@ -47,13 +47,14 @@ This project was completed as a capstone project for my time on the Flation Data
 
 ## Executive Summary
 
-The aim of this project is to create an application that uses a machine learning model to make predictions on UFC fights using fighter statistics. This application would serve as an entertainment tool to increase traffic to a UFC website/blog. The application can be found at https://ufc-predicto-app.herokuapp.com. 
-
 The UFC maintains a statistics website (www.ufcstats.com) that contains information on every fighter, fight and event that has occured in the organistation's history. To obtain the information needed for modelling, two scrapy spiders were made. One of these spiders scraped the detailed breakdown of each fight and one scraped the details of each UFC event. The website actually has a summary of each fighters career statistics, however this could not be used as it would not be reflective of the fighter's performance at the time of the fight. To prevent data leakage it was important to only use data of a fighter that was available prior to the fight occuring. For example, a fighter's current career statistics should not be used to train the model on the outcome of a fight that occured 5 fights ago, because those statistics would have been different at the time of the fight. This was one of the major hurdles of the project and it was why the detailed breakdown of each fight had to be scraped, so that a fighter's statistics at the point of each past fight could be calculated.
 
-Once the data had been through a fair amount of work in pandas, I had each fighter's pre-fight statistics for each of their fights and the data was ready for modelling. A total of 15 models were made, their scores on the validation dataset are outlined below:
+Once the data had been through a fair amount of work in pandas, I had each fighter's pre-fight statistics for each of their fights and the data was ready for modelling. Many models were created and their hyperparameters were tuned, the best performers from each model type are given below with their performance on the validation dataset:
 
-<img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model%20evaluation.png" width=500 align=middle>
+<h5 align="center">Model Performances</h5>
+<p align="center">
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model%20evaluation.png" title="Model Performances" width=500>
+</p>
 
 The stacking model comprised of a support vector machine, random forest and xgboost model was the best performer (see diagram below for model architecture). The most important features in the dataset are also given beneath.
 
