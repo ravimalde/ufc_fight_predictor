@@ -51,14 +51,18 @@ As stated at the beginning of this document, the aim of the project was to creat
 
 ### Web Scraping
 
-The UFC maintains a statistics website (www.ufcstats.com) that contains information on every fighter, fight and event that has occured in the organistation's history. To obtain the information needed for modelling, two scrapy spiders were made:
+The UFC maintains a [statistics website](www.ufcstats.com) that contains information on every fighter, fight and event that has occured in the organistation's history. To extract this data for modelling, two scrapy spiders were created:
 
 - **fighter_spider** : Scraped the detailed breakdown of each fighter's bouts and their measurements such as height and reach. Examples of the pages scraped can be found [here](http://www.ufcstats.com/fight-details/b46f2f007b622bce) and [here](http://www.ufcstats.com/fighter-details/1338e2c7480bdf9e).
 - **fight_spider**: Scraped the details of each ufc event. This was necessary because the page that the fighter_spider scrape had no information on the date of the bout, which was necessary to calculate the age of each fighter at the time of the fight. An example of the pages scraped can be found [here](http://www.ufcstats.com/event-details/53278852bcd91e11).
 
 ### Cleaning Data and Feature Engineering
 
+A standard data cleaning procedure was followed where the data was formatted into the correct data types and then missing values were handled appropriately, usually filling in the value with a related column (e.g. height and reach) or to fill in with the median of the weightclass group.
+
 To prevent data leakage it was important to only use data of a fighter that was available prior to the fight occuring. For example, a fighter's current career statistics should not be used to train the model on the outcome of a fight that occured 5 fights ago, because those statistics would have been different at the time of the fight. This was one of the major hurdles of the project and it was why the detailed breakdown of each fight had to be scraped, so that a fighter's statistics at the point of each past fight could be calculated.
+
+The features left tp
 
 ### Modelling
 
