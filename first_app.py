@@ -7,7 +7,7 @@ import sklearn
 
 st.title("UFC Fight Predictor")
 
-df = pd.read_csv("data_for_database.csv")
+df = pd.read_csv("data/data_for_application.csv")
 
 option1 = st.sidebar.selectbox(
     'Fighter 1',
