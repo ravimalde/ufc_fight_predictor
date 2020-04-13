@@ -79,28 +79,28 @@ The features fed into the model were as follows:
 
 ### Modelling
 
-Many models were created and their hyperparameters were tuned, the best performers from each model type are presented below (sorted by performance on the validation dataset):
+The data was split into three sub datasets; training, validation and test datasets. Many classification models were created and their hyperparameters were tuned using GridSearchCV to crossvalidate their performance. The best performers from each model type are presented below (sorted by performance on the validation dataset):
 
 <h5 align="center">Model Performances</h5>
 <p align="center">
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_evalutaion.png" width=500>
 </p>
 
-The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was comprised of models that had similarities. 
+The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was made from models that had similarities. 
 
 <h5 align="center">Stacking Model Architecture</h5>
 <p align="center">
-  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/stacking_architecture.png" width=600 align=middle>
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/stacking_architecture.png" width=500 align=middle>
 </p>
 
-The most important features in the dataset are also given beneath.
+An interesting insight from the model is the relative feature importances. These were produced using the random forest model as neither the overall stacking model nor the SVM and voting classifier models have the ability to produce feature importances. It is assumed that the feature importance of the stacking model is of a similar distribution to the random forest model. It appears age, win percentage, strikes landed per minute, takedown average and strikes absorbed per minute are the five best predictors of a fight.
 
 <h5 align="center">Relative Feature Importance</h5>
 <p align="center">
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/feature_importance.png" width=850 align=middle>
 </p>
 
-The model achieved an accuracy of 0.65 on the test dataset. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent, in fact this is in part why I believe the sport is gaining huge popularity. The whole outcome of a fight can change in a fraction of a second so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
+The model achieved an accuracy of 0.64 on the test dataset. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequentin (in fact this is in part why I believe the sport is gaining huge popularity), so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
 
 ### Developing Application
 
