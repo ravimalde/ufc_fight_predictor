@@ -7,7 +7,7 @@ The aim of this project was to create an interactive application that uses a mac
 1. [ File Descriptions ](#file_description)
 2. [ Methods Used ](#methods_used)
 3. [ Technologies Used ](#technologies_used)
-4. [ Executive Summary ](#executive_summary)
+  * [ Executive Summary ](#executive_summary)
 3.2. [ Web Scraping ](#web_scraping)
 
 <a name="file_description"></a>
