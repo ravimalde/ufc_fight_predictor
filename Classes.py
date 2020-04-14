@@ -44,6 +44,28 @@ warnings.filterwarnings("ignore")
 
 class Classification():
     
+    """
+    This class is for performing classifcation algorithms such as Logistic Regression,
+    Decision Tree, Random Forest, and SVM.
+    
+    Parameters
+    ----------
+    model: 'Logistic Regression', 'Decision Tree', 'Random Forest' and 'SVM'.
+    This defines the type of model that is going to be modelled.
+    
+    X_train: dataframe
+    Training data features.
+    
+    X_val: dataframe
+    Validation data features.
+    
+    y_train: series
+    Training data target variable.
+    
+    y_val: series
+    Validation data target variable.
+    """
+    
     def __init__(self, model, X_train, X_val, y_train, y_val):
         self.model = model
         self.X_train = X_train
@@ -57,9 +79,7 @@ class Classification():
         elif self.model == 'Decision Tree':
             self.instantiate = DecisionTreeClassifier(random_state=50)
         elif self.model == 'Random Forest':
-            self.instantiate = RandomForestClassifier(n_estimators=500, 
-                                                          n_jobs=-1,
-                                                          random_state=50)
+            self.instantiate = RandomForestClassifier(n_estimators=500, n_jobs=-1, random_state=50)
         elif self.model == "SVM":
             self.instantiate = SVC(probability=True,
                                    random_state=50)
@@ -67,6 +87,31 @@ class Classification():
 # SCORE FUNCTION -------------------------------------------------------------
         
     def scores(self, model, X_train, X_val, y_train, y_val):
+        
+        """
+        Gets the ROC AUC scores for the given data and creates a dataframe that contains the scores.
+    
+        Parameters
+        ----------
+        model_type: 'Logistic Regression', 'Decision Tree', 'Random Forest' and 'SVM'.
+        This defines the type of model that is going to be modelled.
+    
+        X_train: dataframe
+        Training data features.
+    
+        X_val: dataframe
+        Validation data features.
+    
+        y_train: series
+        Training data target variable.
+    
+        y_val: series
+        Validation data target variable.
+        
+        Returns
+        ----------
+        scores_table: DataFrame containing the training and validation AUC ROC scores.
+        """
         
         train_prob = model.predict_proba(X_train)[:,1]
         val_prob = model.predict_proba(X_val)[:,1]
@@ -88,6 +133,21 @@ class Classification():
 # THRESHOLD ANNOTATION -------------------------------------------------------
 
     def annot(fpr,tpr,thr):
+        
+        """
+        Creates the threshold annotation for the ROC plot.
+        Parameters
+        ----------
+        fpr: numpy array 
+        false positive rates for ROC 
+        
+        tpr: numpy array 
+        true positive rates for ROC 
+        
+        thr: numpy array 
+        threshold values for ROC 
+        """
+        
         k=0
         for i,j in zip(fpr,tpr):
             if k % 100 == 0:
@@ -97,6 +157,26 @@ class Classification():
 # ROC PLOT FUNCTION ----------------------------------------------------------
 
     def roc_plot(self, model, X_train, X_val, y_train, y_val):
+        
+        """
+        Creates a ROC plot for the training and validation datasets.
+        Parameters
+        ----------
+        model: the best performing model from the get_scores() function.
+        
+        X_train: dataframe
+        Training data features.
+    
+        X_val: dataframe
+        Validation data features.
+    
+        y_train: series
+        Training data target variable.
+    
+        y_val: series
+        Validation data target variable.
+        """
+        
         train_prob = model.predict_proba(X_train)[:,1]
         val_prob = model.predict_proba(X_val)[:,1]
         plt.figure(figsize=(7,7))
@@ -113,6 +193,20 @@ class Classification():
 # GET SCORES FUNCTION --------------------------------------------------------
 
     def get_scores(self, param_grid, cv_type):
+        
+        """
+        Performs a gridsearch cross validation with given hyperparameters and data.
+        Gets a ROC AUC score for given data and creates a dataframe containing scores.
+        
+        Parameters
+        ----------
+        param_grid: dictionary 
+        Range of hyperparameters to be passed to the GridSearchCV.
+        
+        cv_type: 'skf'
+        Cross validation to be used for gridsearch.
+        """
+        
         reg = self.instantiate
         fit_reg = reg.fit(self.X_train, self.y_train)
         opt_model = GridSearchCV(fit_reg,

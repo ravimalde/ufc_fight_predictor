@@ -57,9 +57,7 @@ class Classification():
         elif self.model == 'Decision Tree':
             self.instantiate = DecisionTreeClassifier(random_state=50)
         elif self.model == 'Random Forest':
-            self.instantiate = RandomForestClassifier(n_estimators=500, 
-                                                          n_jobs=-1,
-                                                          random_state=50)
+            self.instantiate = RandomForestClassifier(n_estimators=500, n_jobs=-1, random_state=50)
         elif self.model == "SVM":
             self.instantiate = SVC(probability=True,
                                    random_state=50)
