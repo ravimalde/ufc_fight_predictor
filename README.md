@@ -7,13 +7,15 @@ The aim of this project was to create an interactive application that uses a mac
 - superseded: Folder containing old notebooks and .py files.
 - ufc_scrape:
   - ufc_scrape:
-    - __init__.py, items.py, middlewares.py, pipelines.py, settings.py: Default Scrapy files.
+    - __init__.py, items.py, middlewares.py, pipelines.py, settings.py: default Scrapy files.
     - spiders:
       - fighters_spider.py: spider to scrape data on the fights of each fighter.
       - fights_spider.py: spider to scrape data on each UFC event.
 - data:
-  - data_fighters.py: scraped data of each fighter's fight details.
-  - data_fights.py: scraped data of each UFC event.
+  - data_fighters.csv: scraped data of each fighter's fight details.
+  - data_fights.csv: scraped data of each UFC event.
+  - data_for_application.csv: data to be used in application.
+  - data_cleaned: cleaned data for modelling.
 - Classes.py: contains grid search classes to be used in modelling.
 - preprocessing.ipynb: notebook for initial exploration of scraped data and preprocessing for modelling.
 - first_app.py: python file for creating the streamlit application.
