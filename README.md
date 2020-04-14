@@ -35,7 +35,7 @@ The aim of this project was to create an interactive application that uses a mac
 - modelling.ipynb: notebook where the models were made, tuned and evaluated.
 - first_app.py: python file for creating the streamlit application.
 - model.pkl: final model saved using pickle.
-- scaler.pkl: StandardScaler transformation saved using pickle.
+- scaler.pkl: RobustScaler transformation saved using pickle.
 - Procfile: file for Heroku that configures services to be run in the dynpo.
 - requirements.txt: file for Heroku that states the python library requirements for the application to be run.
 
