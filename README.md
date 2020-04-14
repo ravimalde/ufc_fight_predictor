@@ -102,6 +102,7 @@ The features fed into the model were as follows:
 - Weight (lbs)
 - Reach (m)
 - Age (years)
+- Fighting Stance
 - Strikes Landed (per minute)
 - Striking Accuracy (%)
 - Strikes Absorbed (per minute)
@@ -114,14 +115,14 @@ The features fed into the model were as follows:
 <a name="modelling"></a>
 ### Modelling
 
-The data was split into three sub datasets; training, validation and test datasets. Many classification models were created and their hyperparameters were tuned using GridSearchCV to crossvalidate their performance. The best performers from each model type are presented below (sorted by performance on the validation dataset):
+The data was split into three sub datasets; training (2828 instances), validation (708 instances) and test (400 instances) datasets. Unfortunately the test dataset is smaller than what I would have liked, but due to the small size of the total dataset, the decision was taken to dedicate more of the data to training in hopes of increasing real world performance. Many classification models were created and their hyperparameters were tuned using GridSearchCV to cross validate their performance. The best performers from each model type are presented below (sorted by performance on the validation dataset):
 
 <h5 align="center">Model Performances</h5>
 <p align="center">
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_evalutaion.png" width=500>
 </p>
 
-The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was made from models that had similarities. 
+The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was formed of models that had similarities. 
 
 <h5 align="center">Stacking Model Architecture</h5>
 <p align="center">
