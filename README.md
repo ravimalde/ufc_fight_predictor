@@ -12,6 +12,7 @@ The aim of this project was to create an interactive application that uses a mac
 2. [ Methods Used ](#methods_used)
 3. [ Technologies Used ](#technologies_used)
 4. [ Executive Summary ](#executive_summary)
+  * [ Web Scraping ](#web_scraping)
   * [ Data Cleaning and Feature Engineering ](#cleaning)
   * [ Modelling ](#modelling)
   * [ Developing Application ](#developing_application)
