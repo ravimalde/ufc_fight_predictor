@@ -22,6 +22,10 @@ The aim of this project was to create an interactive application that uses a mac
 <a name="file_description"></a>
 ## File Descriptions
 
+- preprocessing.ipynb: notebook for initial exploration of scraped data and preprocessing for modelling.
+- modelling.ipynb: notebook where the models were made, tuned and evaluated.
+- Classes.py: contains classes for hyperparameter tuning in modelling notebook.
+- first_app.py: python file for creating the streamlit application.
 - superseded: Folder containing old notebooks and .py files.
 - ufc_scrape:
   - ufc_scrape:
@@ -34,10 +38,6 @@ The aim of this project was to create an interactive application that uses a mac
   - data_fights.csv: scraped data of each UFC event.
   - data_for_application.csv: data to be used in application.
   - data_cleaned: cleaned data for modelling.
-- Classes.py: contains grid search classes to be used in modelling.
-- preprocessing.ipynb: notebook for initial exploration of scraped data and preprocessing for modelling.
-- modelling.ipynb: notebook where the models were made, tuned and evaluated.
-- first_app.py: python file for creating the streamlit application.
 - model.pkl: final model saved using pickle.
 - scaler.pkl: RobustScaler transformation saved using pickle.
 - Procfile: file for Heroku that configures services to be run in the dynpo.
