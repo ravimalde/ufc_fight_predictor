@@ -7,8 +7,13 @@ The aim of this project was to create an interactive application that uses a mac
 1. [ File Descriptions ](#file_description)
 2. [ Methods Used ](#methods_used)
 3. [ Technologies Used ](#technologies_used)
-  * [ Executive Summary ](#executive_summary)
-3.2. [ Web Scraping ](#web_scraping)
+4. [ Executive Summary ](#executive_summary)
+ * [ Data Cleaning and Feature Engineering ](#cleaning)
+ * [ Modelling ](#modelling)
+ * [ Developing Application ](#developing_application)
+ * [ Deploying Application ](#deploying_application)
+ * [ Limitations ](#limitations)
+ * [ Future Work ](#future_work)
 
 <a name="file_description"></a>
 ## File Descriptions
@@ -79,8 +84,8 @@ Information was obtained on a total of 5535 fights. The distribution of these fi
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/number_of_fights.png" width=850>
 </p>
 
-<a name="file_description"></a>
-### Cleaning Data and Feature Engineering
+<a name="cleaning"></a>
+### Data Cleaning and Feature Engineering
 
 A standard data cleaning procedure was followed where the data was formatted into the correct data types and then missing values were handled appropriately, usually filling in the value with a related column (e.g. height and reach) or filling in with the median of the weightclass group.
 
@@ -101,7 +106,7 @@ The features fed into the model were as follows:
 - Takedown Defence (%)
 - Submissions Average (per 15 mins)
 
-<a name="file_description"></a>
+<a name="modelling"></a>
 ### Modelling
 
 The data was split into three sub datasets; training, validation and test datasets. Many classification models were created and their hyperparameters were tuned using GridSearchCV to crossvalidate their performance. The best performers from each model type are presented below (sorted by performance on the validation dataset):
@@ -127,24 +132,24 @@ An interesting insight from the model is the relative feature importances. These
 
 **The model achieved an accuracy of 0.64 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent in (in fact this is in part why I believe the sport is gaining huge popularity); so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
 
-<a name="file_description"></a>
+<a name="developing_application"></a>
 ### Developing Application
 
 To create the application I used a realtively new framework called [Streamlit](www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. I designed the application to allow the user to choose from any two fighters in the organisation and predict who the winner will be while displaying what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib plots so that the user can easily see a visual representation of how the fighter's compare.
 
-<a name="file_description"></a>
+<a name="deploying_application"></a>
 ### Deploying Application
 
 Lastly, the application was deployed to the web using [Heroku](www.heroku.com). This is a cloud platform as a service that allows developers to deploy and scale applicatons. The process was fairly straightforward; simply create an account with them, make a Procfile which is automatically detected by Heroku and serves to outline the commands that need to be run in order to launch the application, and then create a requirements.txt file to tell Heroku which python dependencies are necessary for the application to function. The final step is then to git push the entire github repository to the Heroku branch. Voila, the application is now live and can be accessed by anyone around the world.
 
-<a name="file_description"></a>
+<a name="limitations"></a>
 ### Limitations
 
 1. The current model is not 'symmetric'. By this I mean that the weights for fighter_x and fighter_y features are not equal. This can be seen in the feature importance plot above; for example, age_y is more important than age_x. This mean that the model has some bias to it. The model is actually biased towards fighter y winning. This is not due to fighter_y winning more often in the dataset as this was checked to be a 50/50 split between x and y winning. The origin of this bias is still unknown, however a workaround was implemented. the application actually runs the model twice, swapping the order of fighters input into the model in the second iteration. The model then presents to the user the prediction that has the most confidence, thus ensuring that the same result is given each time, no matter what order the fighter's are input.
 
 2. The dataset is fairly small at only 3936 instances in the cleaned dataset. This impedes the ability for the models to learn from the training set. It also increases the role that chance pays in any results because the validation and test dataset are also proportionately small. Unfortunatetly there is no workaround for this issue.
 
-<a name="file_description"></a>
+<a name="future_work"></a>
 ### Future Work
 
 1. The primary bulk of future work will be aimed at fixing the model symmetry. One possible way to do this would be to duplicate the training dataset, switch the positions of the x and y fighters, and then concatenate it with the original dataset. This may result in the weights of the x and y features being the same. If not, then further investigation into this issue is necessary.
