@@ -4,7 +4,7 @@ The aim of this project was to create an interactive application that uses a mac
 
 ## Table of Contents
 
-1. [File Description](#File Description)
+1. [File Description.](#File Description)
 
 <a name="File Description"></a>
 ## File Descriptions
