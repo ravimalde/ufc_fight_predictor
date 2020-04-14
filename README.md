@@ -2,9 +2,9 @@
 
 The aim of this project was to create an interactive application that uses a machine learning model to make predictions on UFC fights using fighter statistics. This application would serve as an entertainment tool to increase traffic to a UFC website/blog. The application can be found at https://ufc-fight-predictor.herokuapp.com.
 
-Email: ravidmalde@gmail.com
-LinkedIn: www.linkedin.com/in/ravi-malde
-Medium: www.medium.com/@ravimalde
+- Email: ravidmalde@gmail.com
+- LinkedIn: www.linkedin.com/in/ravi-malde
+- Medium: www.medium.com/@ravimalde
 
 ## Table of Contents
 
