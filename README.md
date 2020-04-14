@@ -2,6 +2,9 @@
 
 The aim of this project was to create an interactive application that uses a machine learning model to make predictions on UFC fights using fighter statistics. This application would serve as an entertainment tool to increase traffic to a UFC website/blog. The application can be found at https://ufc-fight-predictor.herokuapp.com.
 
+1. [ Description. ](#desc)
+
+<a name="desc"></a>
 ## File Descriptions
 
 - superseded: Folder containing old notebooks and .py files.
