@@ -25,7 +25,7 @@ The aim of this project was to create an interactive application that uses a mac
 - superseded: Folder containing old notebooks and .py files.
 - ufc_scrape:
   - ufc_scrape:
-    - __init__.py, items.py, middlewares.py, pipelines.py, settings.py: default Scrapy files.
+    - items.py, middlewares.py, pipelines.py, settings.py, init.py: default Scrapy files.
     - spiders:
       - fighters_spider.py: spider to scrape data on the fights of each fighter.
       - fights_spider.py: spider to scrape data on each UFC event.
