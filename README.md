@@ -5,10 +5,12 @@ The aim of this project was to create an interactive application that uses a mac
 ## Table of Contents
 
 1. [ File Descriptions ](#file_description)
+
 2. [ Methods Used ](#methods_used)
+
 3. [ Technologies Used ](#technologies_used)
- 3.1. [ Executive Summary ](#executive_summary)
- 3.2. [ Web Scraping ](#web_scraping)
+3.1. [ Executive Summary ](#executive_summary)
+3.2. [ Web Scraping ](#web_scraping)
 
 <a name="file_description"></a>
 ## File Descriptions
