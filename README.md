@@ -4,9 +4,9 @@ The aim of this project was to create an interactive application that uses a mac
 
 ## Table of Contents
 
-1. [ File Description. ](#File Description)
+1. [ File Description. ](#file_description)
 
-<a name="File Description"></a>
+<a name="file_description"></a>
 ## File Descriptions
 
 - superseded: Folder containing old notebooks and .py files.
