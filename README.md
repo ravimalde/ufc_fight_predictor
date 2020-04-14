@@ -67,7 +67,7 @@ The aim of this project was to create an interactive application that uses a mac
 <a name="executive_summary"></a>
 ## Executive Summary
 
-As stated at the beginning of this document, the aim of the project was to create a web application where users could choose two fighters and use a machine learning model to predict the outcome of the fight. It's purpose is primarly as an entertainment tool that could be placed on a UFC blog/website to increase traffic. Despite it being an entertainment tool, accuracy was still regarded as important because it was thought that making correct predictions would increase the likelihood of it being shared amongst social circles. It was also designed to be interactive and give the user as uch information as possible about the fighters.
+As stated at the beginning of this document, the aim of the project was to create a web application where users could choose two fighters and use a machine learning model to predict the outcome of the fight. It's purpose is primarly as an entertainment tool that could be placed on a UFC blog/website to increase traffic. Despite it being an entertainment tool, accuracy was still regarded as important because making correct predictions would increase the likelihood of it being shared amongst social circles. It was also designed to be interactive and give the user as uch information as possible about the fighters.
 
 <a name="web_scraping"></a>
 ### Web Scraping
