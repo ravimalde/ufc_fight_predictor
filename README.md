@@ -18,6 +18,7 @@ The aim of this project was to create an interactive application that uses a mac
   - data_cleaned: cleaned data for modelling.
 - Classes.py: contains grid search classes to be used in modelling.
 - preprocessing.ipynb: notebook for initial exploration of scraped data and preprocessing for modelling.
+- modelling.ipynb: notebook where the models were made, tuned and evaluated.
 - first_app.py: python file for creating the streamlit application.
 - model.pkl: final model saved using pickle.
 - scaler.pkl: StandardScaler transformation saved using pickle.
@@ -57,6 +58,8 @@ The UFC maintains a [statistics website](www.ufcstats.com) that contains informa
 
 - **fighter_spider** : Scraped the detailed breakdown of each fighter's bouts (such as the number of punches thrown by each fighter) and their measurements such as height and reach. Examples of the pages scraped can be found [here](http://www.ufcstats.com/fight-details/b46f2f007b622bce) and [here](http://www.ufcstats.com/fighter-details/1338e2c7480bdf9e).
 - **fight_spider**: Scraped the details of each ufc event. This was necessary because the page that the fighter_spider scrape had no information on the date of the bout, which was necessary to calculate the age of each fighter at the time of the fight. An example of the pages scraped can be found [here](http://www.ufcstats.com/event-details/53278852bcd91e11).
+
+Information was obtained on a total of 5535 fights. The distribution of these fights over the years can be seen below:
 
 <h5 align="center">Number of Fights in the UFC Each Year</h5>
 <p align="center">
@@ -119,4 +122,12 @@ Lastly, the application was deployed to the web using [Heroku](www.heroku.com). 
 
 ### Limitations
 
+1. The current model is not 'symmetric'. By this I mean that the weights for fighter_x and fighter_y features are not equal. This can be seen in the feature importance plot above; for example, age_y is more important than age_x. This mean that the model has some bias to it. The model is actually biased towards fighter y winning. This is not due to fighter_y winning more often in the dataset as this was checked to be a 50/50 split between x and y winning. The origin of this bias is still unknown, however a workaround was implemented. the application actually runs the model twice, swapping the order of fighters input into the model in the second iteration. The model then presents to the user the prediction that has the most confidence, thus ensuring that the same result is given each time, no matter what order the fighter's are input.
+
+2. The dataset is fairly small at only 3936 instances in the cleaned dataset. This impedes the ability for the models to learn from the training set. It also increases the role that chance pays in any results because the validation and test dataset are also proportionately small. Unfortunatetly there is no workaround for this issue.
+
 ### Future Work
+
+1. The primary bulk of future work will be aimed at fixing the model symmetry. One possible way to do this would be to duplicate the training dataset, switch the positions of the x and y fighters, and then concatenate it with the original dataset. This may result in the weights of the x and y features being the same. If not, then further investigation into this issue is necessary.
+
+2. Thenmodel will be periodically retrained as more data is available. Over the last few years the UFC has held approximately 500 fights per year and this figure is likely to rise. Therefore in a few years time the dataset could be significantly larger, likely resulting in better model performance.
