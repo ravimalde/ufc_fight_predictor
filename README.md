@@ -139,7 +139,7 @@ An interesting insight from the model is the relative feature importances. These
 <a name="developing_application"></a>
 ### Developing Application
 
-To create the application I used a realtively new framework called [Streamlit](www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. I designed the application to allow the user to choose from any two fighters in the organisation and predict who the winner will be while displaying what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib plots so that the user can easily see a visual representation of how the fighter's compare.
+To create the application I used a realtively new framework called [Streamlit](www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. I designed the application to allow the user to choose from any two fighters in the organisation and predict who the winner will be while displaying what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib visualisations so that the user can easily see a visual representation of how the fighter's compare.
 
 <a name="deploying_application"></a>
 ### Deploying Application
@@ -158,4 +158,4 @@ Lastly, the application was deployed to the web using [Heroku](www.heroku.com). 
 
 1. The primary bulk of future work will be aimed at fixing the model symmetry. One possible way to do this would be to duplicate the training dataset, switch the positions of the x and y fighters, and then concatenate it with the original dataset. This may result in the weights of the x and y features being the same. If not, then further investigation into this issue is necessary.
 
-2. Thenmodel will be periodically retrained as more data is available. Over the last few years the UFC has held approximately 500 fights per year and this figure is likely to rise. Therefore in a few years time the dataset could be significantly larger, likely resulting in better model performance.
+2. The model will be periodically retrained as more data is available. Over the last few years the UFC has held approximately 500 fights per year and this figure is likely to rise. Therefore in a few years time the dataset could be significantly larger, likely resulting in better model performance.
