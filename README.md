@@ -123,9 +123,9 @@ The data was split into three sub datasets; training (2828 instances), validatio
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_performance.png" width=500>
 </p>
 
-The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was formed of models that had similarities. 
+The voting model comprised of a support vector machine and random forest classifier was the best performer. The voting classifier takes in the probabilities from both models and then computes the average of the two which then is output as the final prediction. Its model architecture is shown below:
 
-<h5 align="center">Stacking Model Architecture</h5>
+<h5 align="center">Voting Model Architecture</h5>
 <p align="center">
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/voting_architecture.png" width=700 align=middle>
 </p>
@@ -137,7 +137,7 @@ An interesting insight from the model is the relative feature importances. These
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/feature_importance.png" width=850 align=middle>
 </p>
 
-**The model achieved an accuracy of 0.64 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent (in fact this is in part why I believe the sport is gaining huge popularity); so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
+**The model achieved an accuracy of 0.63 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable sports and upsets are frequent (in fact this is in part why I believe the sport is gaining huge popularity); so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
 
 <a name="developing_application"></a>
 ### Developing Application
