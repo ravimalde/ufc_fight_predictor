@@ -63,6 +63,7 @@ The aim of this project was to create an interactive application that uses a mac
 - Pandas
 - Numpy
 - Matplotlib
+- Seaborn
 - Scikit-learn
 - Keras
 - Google Cloud Platform
