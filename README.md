@@ -123,14 +123,14 @@ The data was split into three sub datasets; training (2828 instances), validatio
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_performance.png" width=500>
 </p>
 
-The voting model comprised of a support vector machine and random forest classifier was the best performer. The voting classifier takes in the probabilities from both models and then computes the average of the two which then is output as the final prediction. Its model architecture is shown below:
+The voting model comprised of a support vector machine and random forest classifier was the best performer. The voting classifier takes in the probabilities from both models and then computes the average of the two. This average is then output as the final prediction. The voting model architecture is shown below:
 
 <h5 align="center">Voting Model Architecture</h5>
 <p align="center">
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/voting_architecture.png" width=700 align=middle>
 </p>
 
-An interesting insight from the model is the relative feature importances. These were produced using the random forest model as neither the overall stacking model nor the SVM and voting classifier models have the ability to produce feature importances. It is assumed that the feature importance of the stacking model is of a similar distribution to the random forest model. It appears age, win percentage, strikes landed per minute, takedown average and strikes absorbed per minute are the five best predictors of a fight.
+An interesting insight from the model is the relative feature importances. These were produced using the random forest model as neither the overall voting model nor the SVM model have the ability to produce feature importances. It is assumed that the feature importance of the voting model is of a similar distribution to that of the random forest. It appears age, win percentage, strikes landed per minute, takedown average and strikes absorbed per minute are the five best predictors of a fight.
 
 <h5 align="center">Relative Feature Importance</h5>
 <p align="center">
