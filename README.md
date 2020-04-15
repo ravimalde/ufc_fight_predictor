@@ -120,14 +120,14 @@ The data was split into three sub datasets; training (2828 instances), validatio
 
 <h5 align="center">Model Performances</h5>
 <p align="center">
-  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_evalutaion.png" width=500>
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/model_performance.png" width=500>
 </p>
 
 The stacking model comprised of a support vector machine, random forest and voting classifier (random forest + svm) model was the best performer (see diagram below for model architecture). This came as a surprise because stacking models often perform best when configured with very different models, so that a model's weak performance in one area can be picked up by another model's better performance in that region of the dataset. Nevertheless, the numbers don't lie, and the best performing model was formed of models that had similarities. 
 
 <h5 align="center">Stacking Model Architecture</h5>
 <p align="center">
-  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/stacking_architecture.png" width=700 align=middle>
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/voting_architecture.png" width=700 align=middle>
 </p>
 
 An interesting insight from the model is the relative feature importances. These were produced using the random forest model as neither the overall stacking model nor the SVM and voting classifier models have the ability to produce feature importances. It is assumed that the feature importance of the stacking model is of a similar distribution to the random forest model. It appears age, win percentage, strikes landed per minute, takedown average and strikes absorbed per minute are the five best predictors of a fight.
