@@ -126,7 +126,7 @@ The stacking model comprised of a support vector machine, random forest and voti
 
 <h5 align="center">Stacking Model Architecture</h5>
 <p align="center">
-  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/stacking_architecture.png" width=500 align=middle>
+  <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/stacking_architecture.png" width=700 align=middle>
 </p>
 
 An interesting insight from the model is the relative feature importances. These were produced using the random forest model as neither the overall stacking model nor the SVM and voting classifier models have the ability to produce feature importances. It is assumed that the feature importance of the stacking model is of a similar distribution to the random forest model. It appears age, win percentage, strikes landed per minute, takedown average and strikes absorbed per minute are the five best predictors of a fight.
@@ -136,7 +136,7 @@ An interesting insight from the model is the relative feature importances. These
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/feature_importance.png" width=850 align=middle>
 </p>
 
-**The model achieved an accuracy of 0.64 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent in (in fact this is in part why I believe the sport is gaining huge popularity); so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
+**The model achieved an accuracy of 0.64 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent (in fact this is in part why I believe the sport is gaining huge popularity); so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
 
 <a name="developing_application"></a>
 ### Developing Application
@@ -160,4 +160,4 @@ Lastly, the application was deployed to the web using [Heroku](www.heroku.com). 
 
 1. The primary bulk of future work will be aimed at fixing the model symmetry. One possible way to do this would be to duplicate the training dataset, switch the positions of the x and y fighters, and then concatenate it with the original dataset. This may result in the difference of weights for the x and y features being much smaller and thus reduce the bias. If not, then further investigation into this issue is necessary.
 
-2. The model will be periodically retrained as more data is available. Over the last few years the UFC has held approximately 500 fights per year and this figure is likely to rise as the MMA is growing in popularity. Therefore in a few years time the dataset could be significantly larger, likely resulting in better model performance.
+2. The model will be periodically retrained as more data is available. Over the last few years the UFC has held approximately 500 fights per year and this figure is likely to rise as MMA is growing in popularity. Therefore in a few years time the dataset could be significantly larger, likely resulting in better model performance.
