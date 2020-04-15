@@ -51,7 +51,7 @@ class Classification():
     Parameters
     ----------
     model: 'Logistic Regression', 'Decision Tree', 'Random Forest' and 'SVM'.
-    This defines the type of model that is going to be modelled.
+    This defines the type of model that is going to be implemented.
     
     X_train: dataframe
     Training data features.
@@ -89,7 +89,7 @@ class Classification():
     def scores(self, model, X_train, X_val, y_train, y_val):
         
         """
-        Gets the ROC AUC scores for the given data and creates a dataframe that contains the scores.
+        Gets the ROC AUC scores for the best performing model and creates a dataframe that contains the scores.
     
         Parameters
         ----------
@@ -242,6 +242,10 @@ class Classification():
 
     def opt_plots(self):
         
+        '''
+        Outputs a heatmap showing the AUC ROC scores for each hyperparameter combination.
+        '''
+        
         if self.model == "Decision Tree" or self.model == "Random Forest":
             opt = pd.DataFrame(self.opt_model.cv_results_)
             cols = [col for col in opt.columns if ('mean' in col or 'std' in col) and 'time' not in col]
@@ -269,6 +273,22 @@ class Classification():
 
     def conf_matrix(y_true, y_pred):
         
+        """
+        Creates a confusion matrix.
+        
+        Parameters
+        ----------
+        y_true: series 
+        The target variable of the validation data.
+        
+        y_pred: series 
+        The predicted values of the target variable.
+        
+        Returns
+        ----------
+        cm: Confusion matrix.
+        """
+        
         cm = {'TP': 0, 'TN': 0, 'FP': 0, 'FN': 0}
         
         for i, label in enumerate(y_true):
@@ -290,6 +310,10 @@ class Classification():
 # DISPLAY PRETTY CONFUSION MATRIX FUNCTION -----------------------------------
 
     def pretty_conf_matrix(self):
+        
+        '''
+        Displays a confusion matrix visualisation.
+        '''
         
         Classification.conf_matrix(self.y_val, self.y_predicted)
         cnf_matrix = confusion_matrix(self.y_val, self.y_predicted)
@@ -316,6 +340,10 @@ class Classification():
 
     def plot_dtree(self):
         
+        '''
+        Creates a visualisation of decision tree or random forest models.
+        '''
+        
         if self.model == "Decision Tree" or self.model == "Random Forest":
             
             dot_data = StringIO()
@@ -337,6 +365,30 @@ class Classification():
 
 class Ensemble(Classification):
     
+    """
+    This class is for implementing ensemble algorithms such as voting, AdaBoost, XGBoost, or stacking.
+    
+    Parameters
+    ----------
+    ensemble_method: 'Voting', 'AdaBoost', 'XGBoost', 'Stacking'
+    This defines the type of model that is going to be implemented.
+    
+    estimators: list
+    The classification models to be used in the ensemble method.
+    
+    X_train: dataframe
+    Training data features.
+    
+    X_val: dataframe
+    Validation data features.
+    
+    y_train: series
+    Training data target variable.
+    
+    y_val: series
+    Validation data target variable. 
+    """
+    
     def __init__(self, ensemble_method, estimators, X_train, X_val, y_train, y_val):
         
         self.ensemble_method = ensemble_method
@@ -355,6 +407,14 @@ class Ensemble(Classification):
             self.instantiate = StackingClassifier(estimators)
             
     def ensemble_scores(self):
+        
+        """
+        Gets the ROC AUC scores for the best performing model and creates a dataframe that contains the scores.
+    
+        Returns
+        ----------
+        scores_table: DataFrame containing the training and validation AUC ROC scores.
+        """
 
         train_prob = self.instantiate.predict_proba(self.X_train)[:,1]
         val_prob = self.instantiate.predict_proba(self.X_val)[:,1]
@@ -374,6 +434,20 @@ class Ensemble(Classification):
         return self.scores_table
     
     def ensemble_get_scores(self, param_grid, cv_type):
+        
+        """
+        Performs a gridsearch cross validation with given hyperparameters and data.
+        Gets a ROC AUC score for given data and creates a dataframe containing scores.
+        
+        Parameters
+        ----------
+        param_grid: dictionary 
+        Range of hyperparameters to be passed to the GridSearchCV.
+        
+        cv_type: 'skf'
+        Cross validation to be used for gridsearch.
+        """
+        
         reg = self.instantiate
         fit_reg = reg.fit(self.X_train, self.y_train)
         opt_model = GridSearchCV(fit_reg,
@@ -397,6 +471,22 @@ class Ensemble(Classification):
         
     def conf_matrix(y_true, y_pred):
         
+        """
+        Creates a confusion matrix.
+        
+        Parameters
+        ----------
+        y_true: series 
+        The target variable of the validation data.
+        
+        y_pred: series 
+        The predicted values of the target variable.
+        
+        Returns
+        ----------
+        cm: Confusion matrix.
+        """
+        
         cm = {'TP': 0, 'TN': 0, 'FP': 0, 'FN': 0}
         
         for i, label in enumerate(y_true):
@@ -416,6 +506,10 @@ class Ensemble(Classification):
         return cm
     
     def ensemble_pretty_conf_matrix(self):
+        
+        '''
+        Displays a confusion matrix visualisation.
+        '''
         
         Ensemble.conf_matrix(self.y_val, self.y_predicted)
         cnf_matrix = confusion_matrix(self.y_val, self.y_predicted)
