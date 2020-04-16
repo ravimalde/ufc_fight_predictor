@@ -95,7 +95,7 @@ Information was obtained on a total of 5535 fights. The distribution of these fi
 
 A standard data cleaning procedure was followed where the data was formatted into the correct data types and then missing values were handled appropriately, usually filling in the value with a related column (e.g. height and reach) or filling in with the median of the weightclass group.
 
-A major effort in the project was towards preventing data leakage. It was important to only use data of a fighter that was available prior to the fight occuring. For example, a fighter's current career statistics should not be used to train the model on the outcome of a fight that occured 5 fights ago, because those statistics would have been different at the time of the fight. Therefore, for each past fight, the fighters' pre-fight statistics were calculated using the detailed breakdown of their previous bouts. Additionally to this, only the fighters' 5 previous fights were used to caluclate their pre-fight statistics. This decision was made to do this because over a fighter's career, their performance and style of fighting can change so only their recent performances should be considered.
+A major effort in the project was towards preventing data leakage. It was important to only use data of a fighter that was available prior to the fight occuring. For example, a fighter's current career statistics should not be used to train the model on the outcome of a fight that occured 5 fights ago, because those statistics would have been different at the time of the fight. Therefore, for each past fight, the fighters' pre-fight statistics were calculated using the detailed breakdown of their previous bouts. Additionally to this, only the fighters' 5 previous fights were used to caluclate their pre-fight statistics. The decision was made to do this because over a fighter's career, their performance and style of fighting can change, so only their recent performances should be considered.
 
 The features fed into the model were as follows:
 
@@ -130,19 +130,19 @@ The voting model comprised of a support vector machine and random forest classif
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/voting_architecture.png" width=700 align=middle>
 </p>
 
-An interesting insight from the model is the relative feature importances. These were produced using the random forest model as neither the overall voting model nor the SVM model have the ability to produce feature importances. It is assumed that the feature importance of the voting model is of a similar distribution to that of the random forest. It appears age, win percentage, strikes landed per minute, takedown average and strikes absorbed per minute are the five best predictors of a fight.
+An interesting insight from the model is the relative feature importance. This was produced using the random forest model as neither the overall voting model nor the SVM model have the ability to produce feature importances. It is assumed that the feature importance of the voting model is of a similar distribution to that of the random forest. It appears age, win percentage, strikes landed per minute, takedown average and strikes absorbed per minute are the five best predictors of a fight.
 
 <h5 align="center">Relative Feature Importance</h5>
 <p align="center">
   <img src="https://github.com/ravimalde/ufc_fight_predictor/blob/master/images/feature_importance.png" width=850 align=middle>
 </p>
 
-**The model achieved an accuracy of 0.63 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable sports and upsets are frequent (in fact this is in part why I believe the sport is gaining huge popularity); so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
+**The model achieved an accuracy of 0.63 on the test dataset**. The nature of combat sports, particularly MMA, is that they are very unpredictable and upsets are frequent (in fact this is in part why I believe the sport is gaining huge popularity); so although this acuracy isn't impressive on paper, I'm happy with the outcome and confident that the performance could be improved upon in the future as more data becomes available.
 
 <a name="developing_application"></a>
 ### Developing Application
 
-To create the application I used a realtively new framework called [Streamlit](www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. I designed the application to allow the user to choose from any two fighters in the organisation and predict who the winner will be while displaying what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib visualisations so that the user can easily see a visual representation of how the fighter's compare.
+To create the application I used a realtively new framework called [Streamlit](www.streamlit.com). This tool allows for the creation of interactive machine learning applications in an extremely pythonic way. I designed the application to allow the user to choose from any two fighters in the organisation and predict who the winner will be, while displaying what the confidence is in that outcome occuring. It also presents all of the fighter statistics in matplotlib visualisations so that the user can easily see a visual representation of how the fighter's compare.
 
 <a name="deploying_application"></a>
 ### Deploying Application
@@ -152,13 +152,13 @@ Lastly, the application was deployed to the web using [Heroku](www.heroku.com). 
 <a name="limitations"></a>
 ### Limitations
 
-1. The current model is not 'symmetric'. By this I mean that the weights for fighter_x and fighter_y features are not equal. This can be seen in the feature importance plot above; for example, age_y is more important than age_x. This mean that the model has some bias. In testing, the model actually favours fighter y winning. This is not due to fighter_y winning more often in the dataset as this was checked to be a 50/50 split between fighter x and fighter y winning. The origin of this bias is still unknown, however a workaround was implemented. The application predicts with the model twice, swapping the order of the fighters input into the model in the second iteration. The model then presents to the user the most confident prediction of the two, thus ensuring that the same result is given each time, no matter what order the fighter's are input.
+1. The current model is not 'symmetric'. By this I mean that the weights for fighter_x and fighter_y features are not equal. This can be seen in the feature importance plot above; for example, age_y is more important than age_x. This means that the model has some bias; theoretically, the importance of x and y features should be equal. In testing, the model actually favours fighter y winning. This is not due to fighter_y winning more often in the dataset as fighte_x and fighter_y both win 50% of the time. The origin of this bias is still unknown, however a workaround was implemented. The application predicts with the model twice, swapping the order of the fighters input into the model in the second iteration. The model then presents to the user the most confident prediction of the two, thus ensuring that the same result is given each time, no matter what order the fighter's are input.
 
 2. The dataset is fairly small at only 3936 instances in the cleaned dataset. This impedes the ability for the models to learn from the training set. It also increases the role that chance pays in any results because the validation and test dataset are also smaller than desired. Unfortunatetly at present there is no workaround for this issue.
 
 <a name="future_work"></a>
 ### Future Work
 
-1. The primary bulk of future work will be aimed at fixing the model symmetry. One possible way to do this would be to duplicate the training dataset, switch the positions of the x and y fighters, and then concatenate it with the original dataset. This may result in the difference of weights for the x and y features being much smaller and thus reduce the bias. If not, then further investigation into this issue is necessary.
+1. The primary bulk of future work will be aimed at fixing the model symmetry. One possible way to do this would be to duplicate the training dataset, switch the positions of the x and y fighters, and then concatenate it with the original dataset. This may result in the difference of weights for the x and y features being smaller and thus reduce the bias. If not, then further investigation into this issue is necessary.
 
 2. The model will be periodically retrained as more data is available. Over the last few years the UFC has held approximately 500 fights per year and this figure is likely to rise as MMA is growing in popularity. Therefore in a few years time the dataset could be significantly larger, likely resulting in better model performance.
