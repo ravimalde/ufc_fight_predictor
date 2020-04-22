@@ -41,7 +41,7 @@ The aim of this project was to create an interactive application that uses a mac
   - data_cleaned: cleaned data for modelling.
 - model.pkl: final model saved using pickle.
 - scaler.pkl: RobustScaler transformation saved using pickle.
-- Procfile: file for Heroku that configures services to be run in the dynpo.
+- Procfile: file for Heroku that configures services to be run in the dyno.
 - requirements.txt: file for Heroku that states the python library requirements for the application to be run.
 
 <a name="methods_used"></a>
