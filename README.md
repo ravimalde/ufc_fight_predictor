@@ -53,7 +53,7 @@ The aim of this project was to create an interactive application that uses a mac
 - Machine learning
 - Cloud computing
 - Front end development
-- Deploying to web
+- Web deployment
 
 <a name="technologies_used"></a>
 ## Technologies
