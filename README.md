@@ -56,7 +56,7 @@ The aim of this project was to create an interactive application that uses a mac
 - Web deployment
 
 <a name="technologies_used"></a>
-## Technologies
+## Technologies Used
 
 - Python
 - Scrapy
