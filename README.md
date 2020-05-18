@@ -28,7 +28,7 @@ The aim of this project was to create an interactive application that uses a mac
 - Classes.py: contains classes for hyperparameter tuning in modelling notebook.
 - first_app.py: python file for creating the streamlit application.
 - superseded: Folder containing old notebooks and .py files.
-- ufc_scrape:
+- ufc_scrape: 
   - ufc_scrape:
     - items.py, middlewares.py, pipelines.py, settings.py, init.py: default Scrapy files.
     - spiders:
